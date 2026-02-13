@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine ❤️</title>
+
+<style>
+
+/* =====================================================
+   GOOGLE FONT
+===================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+
+/* =====================================================
+   BODY + BACKGROUND
+===================================================== */
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Poppins,sans-serif;
+text-align:center;
+overflow:hidden;
+position:relative;
+
+background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#ffc3a0,#ffafbd,#ff758c);
+background-size:400% 400%;
+animation:gradientBG 12s ease infinite;
+}
+
+@keyframes gradientBG{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* glow particles */
+body::after{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at 20% 20%,rgba(255,255,255,0.2),transparent 40%),
+radial-gradient(circle at 80% 70%,rgba(255,255,255,0.2),transparent 40%);
+pointer-events:none;
+}
+
+
+/* =====================================================
+   CARD UI
+===================================================== */
+.card{
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(25px);
+border:1px solid rgba(255,255,255,0.3);
+padding:60px 80px;
+border-radius:35px;
+box-shadow:0 40px 80px rgba(0,0,0,0.25);
+max-width:700px;
+color:white;
+position:relative;
+z-index:2;
+animation:fadeIn 0.5s ease;
+}
+
+.hidden{display:none;}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(40px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+/* glowing border */
+.card::before{
+content:"";
+position:absolute;
+inset:-2px;
+border-radius:35px;
+background:linear-gradient(45deg,#ff4d6d,#ff758c,#ffc3a0);
+z-index:-1;
+filter:blur(15px);
+opacity:0.5;
+}
+
+
+/* =====================================================
+   TEXT
+===================================================== */
+h1,h2{
+font-weight:800;
+letter-spacing:1px;
+}
+
+#question{
+font-size:60px;
+}
+
+
+/* =====================================================
+   IMAGES
+===================================================== */
+img{
+width:230px;
+margin:25px 0;
+border-radius:20px;
+transition:0.4s;
+}
+
+img:hover{
+transform:scale(1.08) rotate(1deg);
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+button{
+padding:15px 40px;
+margin:12px;
+border:none;
+border-radius:50px;
+font-size:18px;
+cursor:pointer;
+transition:0.25s;
+font-weight:600;
+position:relative;
+overflow:hidden;
+}
+
+/* shine effect */
+button::after{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.6),transparent);
+transition:0.6s;
+}
+button:hover::after{left:100%;}
+
+#yesBtn,#giftBtn{
+background:linear-gradient(135deg,#ff4d6d,#ff758c);
+color:white;
+box-shadow:0 15px 30px rgba(255,77,109,0.5);
+font-size: 40px;
+}
+
+#yesBtn:hover,#giftBtn:hover{
+transform:translateY(-3px) scale(1.05);
+}
+
+#noBtn{background:white;color:#333;font-size: 40px;}
+.back{background:#ddd;}
+.homeBtn{background:#222;color:white;}
+
+
+/* =====================================================
+   GALLERY
+===================================================== */
+.gallery{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:15px;
+}
+
+.gallery img{
+width:140px;
+box-shadow:0 15px 25px rgba(0,0,0,0.2);
+}
+
+
+/* =====================================================
+   QUIZ
+===================================================== */
+.quizBox{
+background:rgba(255,255,255,0.2);
+padding:25px;
+border-radius:20px;
+}
+
+.option{
+display:block;
+background:white;
+color:#333;
+padding:12px;
+margin:10px 0;
+border-radius:10px;
+cursor:pointer;
+transition:0.2s;
+}
+
+.option:hover{
+transform:scale(1.05);
+background:#ffe1e7;
+}
+
+.progress{
+height:8px;
+background:rgba(255,255,255,0.3);
+border-radius:10px;
+margin-bottom:20px;
+overflow:hidden;
+}
+
+.progressFill{
+height:100%;
+background:white;
+width:0%;
+transition:0.4s;
+}
+
+
+/* =====================================================
+   FINAL SCREEN LAYOUT
+===================================================== */
+.final-content{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:40px;
+flex-wrap:wrap;
+}
+
+.final-content img{margin:0;}
+.final-content button{margin:0;}
+
+
+/* =====================================================
+   SNOW EFFECT
+===================================================== */
+.snow-container{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:0;
+overflow:hidden;
+}
+
+.snowflake{
+position:absolute;
+top:-10px;
+color:white;
+font-size:12px;
+opacity:0.8;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10px);}
+100%{transform:translateY(100vh);}
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+/* tablets */
+@media (max-width:1024px){
+.card{max-width:85vw;padding:50px 40px;}
+#question{font-size:45px;}
+h2{font-size:28px;}
+img{width:200px;}
+button{padding:14px 30px;font-size:16px;}
+}
+
+/* mobile */
+@media (max-width:768px){
+body{align-items:flex-start;padding-top:40px;}
+.card{max-width:92vw;padding:40px 20px;border-radius:25px;}
+#question{font-size:32px;line-height:1.3;}
+h2{font-size:24px;}
+img{width:170px;margin:20px 0;}
+button{width:90%;max-width:260px;font-size:15px;padding:12px 20px;margin:8px auto;display:block;}
+.gallery img{width:110px;}
+.quizBox{padding:18px;}
+}
+
+/* small phones */
+@media (max-width:480px){
+.card{padding:30px 15px;}
+#question{font-size:26px;}
+img{width:140px;}
+button{font-size:14px;padding:10px 15px;}
+}
+/* bigger final screen title */
+.final-title{
+font-size:70px;
+line-height:1.2;
+margin-bottom: 20px;
+}
+/* ---------- BIGGER TEXT FOR GIFT + QUIZ + SECTIONS ---------- */
+
+/* gift menu buttons */
+#giftMenu button{
+font-size:26px;
+}
+
+/* quiz question text */
+.quizBox h3{
+font-size:28px;
+}
+
+/* quiz options */
+.option{
+font-size:25px;
+}
+
+/* progress section text */
+#quizSection h2{
+font-size:30px;
+}
+
+/* love letter text */
+#letterSection p{
+font-size:26px;
+line-height:1.6;
+}
+
+/* section headings */
+#giftMenu h2,
+#letterSection h2,
+#photoSection h2{
+font-size:30px;
+}
+
+/* back + home buttons inside sections */
+.back,
+.homeBtn{
+font-size:25px;
+}
+
+/* photo section text spacing */
+#photoSection{
+font-size:25px;
+}
+#noBtn{
+position:absolute;
+}
+#noBtn{
+position:absolute;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="snow-container"></div>
+
+<!-- MAIN SCREEN -->
+<div id="mainScreen" class="card">
+<h1 id="question">Will you be my Valentine? ❤️</h1>
+<img id="catGif" src="asking.gif">
+
+<div>
+<button id="yesBtn">Yes ❤️</button>
+<button id="noBtn">No 😢</button>
+</div>
+
+<button class="homeBtn" onclick="goHome()">🏠 Home</button>
+</div>
+
+<!-- FINAL SCREEN -->
+<div id="finalScreen" class="card hidden">
+<h1 class="final-title">Happy Valentine's Day Babyy❤️</h1>
+
+
+<div class="final-content">
+<img src="couple.gif">
+<button id="giftBtn">See Your Gifts 🎁</button>
+</div>
+
+<button class="homeBtn" onclick="goHome()">🏠 Home</button>
+</div>
+
+<!-- GIFT MENU -->
+<div id="giftMenu" class="card hidden">
+<h2>Choose Your Gift 💝</h2>
+<button onclick="startQuiz()">Gift 1 — Quiz</button>
+<button onclick="showSection('letterSection')">Gift 2 — Love Letter</button>
+<button onclick="showSection('photoSection')">Gift 3 — Our Memories</button>
+<button class="back" onclick="goBack('finalScreen')">Back</button>
+<button class="homeBtn" onclick="goHome()">🏠 Home</button>
+</div>
+
+<!-- QUIZ -->
+<div id="quizSection" class="card hidden">
+<h2>Love Quiz ❤️</h2>
+
+<div class="progress">
+<div id="progressFill" class="progressFill"></div>
+</div>
+
+<div id="quizContainer" class="quizBox"></div>
+
+<button class="back" onclick="goBack('giftMenu')">Back</button>
+<button class="homeBtn" onclick="goHome()">🏠 Home</button>
+</div>
+
+<!-- LOVE LETTER -->
+<div id="letterSection" class="card hidden">
+<h2>My Love Letter ❤️</h2>
+<p>Edit this text with your own love letter.</p>
+<button class="back" onclick="goBack('giftMenu')">Back</button>
+<button class="homeBtn" onclick="goHome()">🏠 Home</button>
+</div>
+
+<!-- PHOTOS -->
+<div id="photoSection" class="card hidden">
+<h2>Our Memories 📸</h2>
+<div class="gallery">
+<img src="photo1.jpg">
+<img src="photo2.jpg">
+<img src="photo3.jpg">
+</div>
+<button class="back" onclick="goBack('giftMenu')">Back</button>
+<button class="homeBtn" onclick="goHome()">🏠 Home</button>
+</div>
+
+<script>
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+const question=document.getElementById("question");
+const gif=document.getElementById("catGif");
+
+const mainScreen=document.getElementById("mainScreen");
+const finalScreen=document.getElementById("finalScreen");
+const giftMenu=document.getElementById("giftMenu");
+
+let noClicks=0;
+let size=1;
+
+
+/* =====================================================
+   NO BUTTON MOVE ON CLICK + ESCAPE AFTER 4TH TRY
+===================================================== */
+
+noBtn.style.position = "absolute";
+
+noBtn.addEventListener("click", () => {
+
+noClicks++;
+
+/* ---------- GIF + TEXT LOGIC (same as before) ---------- */
+
+if(noClicks===1){
+question.innerText="Think again 💭";
+gif.src="sad.gif";
+}
+else if(noClicks===2){
+question.innerText="Are you sure? 😢";
+gif.src="sad.gif";
+}
+else if(noClicks===3){
+question.innerText="See this 😠";
+gif.src="angry.gif";
+}
+
+
+/* ---------- BUTTON MOVEMENT ---------- */
+
+/* first 4 tries → stay inside screen */
+if(noClicks <= 4){
+
+/* move inside main card only */
+const container = document.getElementById("mainScreen");
+
+const padding = 20;
+
+const maxX = container.clientWidth - noBtn.offsetWidth - padding;
+const maxY = container.clientHeight - noBtn.offsetHeight - padding;
+
+const randomX = Math.random() * maxX;
+const randomY = Math.random() * maxY;
+
+noBtn.style.left = randomX + "px";
+noBtn.style.top = randomY + "px";
+
+noBtn.style.left = randomX + "px";
+noBtn.style.top = randomY + "px";
+}
+
+/* after 4th try → escape outside screen */
+else{
+noBtn.style.left = "200vw";
+noBtn.style.top = "200vh";
+}
+
+});
+
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+yesBtn.onclick=()=>{
+mainScreen.classList.add("hidden");
+finalScreen.classList.remove("hidden");
+};
+
+document.getElementById("giftBtn").onclick=()=>{
+finalScreen.classList.add("hidden");
+giftMenu.classList.remove("hidden");
+};
+
+function showSection(id){
+hideAll();
+document.getElementById(id).classList.remove("hidden");
+}
+
+function goBack(id){
+hideAll();
+document.getElementById(id).classList.remove("hidden");
+}
+
+function hideAll(){
+document.querySelectorAll(".card").forEach(c=>c.classList.add("hidden"));
+}
+
+function goHome(){
+hideAll();
+mainScreen.classList.remove("hidden");
+noClicks=0;
+size=1;
+yesBtn.style.transform="scale(1)";
+noBtn.style.display="inline-block";
+question.innerText="Will you be my Valentine? ❤️";
+gif.src="asking.gif";
+}
+
+
+/* =====================================================
+   QUIZ
+===================================================== */
+const quizData=[
+{question:"What is my favorite thing about you?",options:["Smile","Eyes","Everything"]},
+{question:"Our first inside joke?",options:["Frequencyyy","Happinesss","Bitchhh"]},
+{question:"Do you love me?",options:["Yes","Yes","Yes"]}
+];
+
+let currentQ=0;
+
+function startQuiz(){
+currentQ=0;
+showSection("quizSection");
+showQuestion();
+}
+
+function showQuestion(){
+const container=document.getElementById("quizContainer");
+const progress=document.getElementById("progressFill");
+
+if(currentQ>=quizData.length){
+container.innerHTML = `
+<h3 style="font-size:32px; line-height:1.4;">
+❤️ All the answers you gave are right because you are always right ❤️
+</h3>
+<p style="font-size:22px;">(Obviously 😌)</p>
+`;
+progress.style.width="100%";
+return;
+}
+
+
+let q=quizData[currentQ];
+progress.style.width=((currentQ/quizData.length)*100)+"%";
+
+let html=`<h3>${q.question}</h3>`;
+q.options.forEach(opt=>{
+html+=`<div class="option" onclick="nextQuestion()">${opt}</div>`;
+});
+
+container.innerHTML=html;
+}
+
+function nextQuestion(){
+currentQ++;
+showQuestion();
+}
+
+
+/* =====================================================
+   SNOW GENERATOR
+===================================================== */
+const snowContainer=document.querySelector(".snow-container");
+
+for(let i=0;i<80;i++){
+let snow=document.createElement("div");
+snow.classList.add("snowflake");
+
+snow.innerHTML="❄";
+snow.style.left=Math.random()*100+"vw";
+snow.style.fontSize=Math.random()*12+8+"px";
+snow.style.animationDuration=Math.random()*5+5+"s";
+snow.style.opacity=Math.random();
+
+snowContainer.appendChild(snow);
+}
+
+</script>
+
+</body>
+</html>
